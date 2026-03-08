@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="google-site-verification" content="SXM-GBwV54gm_ST7j29Xt5w1T3AODQE3xs3DZYm_b5Y" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title> صحة - منصة الخدمات الصحية seha.sa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* Global Styles */
+    * {
+  font-family: 'Cairo', 'Noto Sans Arabic', 'Tajawal', sans-serif !important;
+      box-sizing: border-box; 
+    }
+    
+    body { 
+      background-color: #ffffff; 
+      margin: 0; 
+      padding: 30px 0 0 0; 
+      direction: rtl; 
+    }
+    
+    /* Header Section */
+    .top-header { 
+      background-color: #ffffff; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      padding: 10px 20px; 
+      position: fixed; 
+      top: -100px; 
+      left: 0; 
+      right: 0; 
+      opacity: 0; 
+      z-index: 1000; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+      transition: top 0.8s ease, opacity 0.8s ease; 
+    }
+    
+    .top-header.show { 
+      top: 0; 
+      opacity: 1; 
+    }
+    
+    .hamburger-icon { 
+      font-size: 26px; 
+      color: #67b3f5; 
+      cursor: pointer; 
+    }
+    
+    .brand-logo { 
+      height: 48px; 
+      object-fit: contain; 
+    }
+    
+    /* Main Content Description */
+    .primary-description {
+      font-size: 14px;
+      white-space: normal;
+      line-height: 1.6;
+      margin: 10px 20px 20px;
+    }
+    
+    @media (max-width: 400px) {
+      .primary-description {
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    }
+
+    /* Main Title */
+    h1 { 
+      color: #2e6fb3; 
+      text-align: center; 
+      font-weight: 700; 
+      font-size: 35px; 
+      margin-top: 40px; 
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
+      position: relative; 
+      display: inline-block; 
+      width: auto; 
+    }
+    
+    h1::before { 
+      content: ""; 
+      position: absolute; 
+      top: 50%; 
+      left: 50%; 
+      transform: translate(-50%, -50%); 
+      background-image: url('https://i.postimg.cc/mktdLGnp/image.png'); 
+      background-size: cover; 
+      background-repeat: no-repeat; 
+      background-position: center; 
+      width: calc(100% + 20px); 
+      height: 80%; 
+      z-index: -1; 
+    }
+    
+    /* Paragraph Styles */
+    p { 
+      color: #6d7781; 
+      text-align: center; 
+      font-size: 16px; 
+      margin: 10px 20px 30px; 
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05); 
+    }
+    
+    /* Form Input Styles */
+    .form-input-container { 
+      position: relative; 
+      margin-bottom: 1.5em; 
+    }
+    
+    .form-input-field { 
+      width: calc(100% - 30px); 
+      display: block; 
+      padding: 3px 12px; 
+      font-size: 14.5px; 
+      margin: 10px auto; 
+      border: 1px solid #ccc; 
+      border-radius: 8px; 
+      background-color: white; 
+      text-align: right; 
+      transition: border-color 0.3s ease; 
+    }
+    
+    .form-input-field:focus { 
+      border-color: #67b3f5; 
+      outline: none; 
+    }
+    
+    /* Button Styles */
+    .primary-btn, .secondary-btn, .tertiary-btn, .quaternary-btn { 
+      display: block; 
+      margin: 15px auto; 
+      padding: 6px 10px; 
+      background-color: #2e6fb9; 
+      color: white; 
+      border: none; 
+      border-radius: 8px; 
+      font-size: 12px; 
+      width: 120px; 
+      cursor: pointer; 
+      position: relative; 
+      overflow: hidden; 
+      transition: background-color 0.2s ease; 
+    }
+    
+    /* Loading Button State */
+    .primary-btn.loading {
+      background-color: #24568f; 
+      cursor: wait;
+    }
+    
+    /* Error Message Styles */
+    .error-message-tab { 
+      background-color: #ffe5e5; 
+      color: #990000; 
+      text-align: center; 
+      padding: 10px; 
+      margin: 10px auto; 
+      border-radius: 5px; 
+      width: calc(100% - 40px); 
+      display: none; 
+    }
+    
+    /* Result Display Box */
+    .results-display-box { 
+      background-color: #f0f0f0; 
+      padding: 20px; 
+      margin: 40px auto 20px; 
+      border-radius: 8px; 
+      width: calc(100% - 40px); 
+      text-align: center; 
+      display: none; 
+    }
+    
+    /* Information Labels */
+    .information-label { 
+      font-weight: bold; 
+      margin-top: 10px; 
+    }
+    
+    .information-data { 
+      margin-bottom: 15px; 
+    }
+    
+    /* Footer Section */
+    .page-footer { 
+      background-color: #2e6fb2; 
+      color: white; 
+      padding: 20px 15px 60px 20px; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: flex-start; 
+      text-align: center; 
+      font-size: 14px; 
+      direction: rtl; 
+      min-height: 180px; 
+      gap: 15px; 
+      position: relative; 
+    }
+    
+    .page-footer img.footer-brand-logo { 
+      height: 75px; 
+      filter: none; 
+      margin-bottom: 15px; 
+    }
+    
+    .footer-description-text { 
+      font-size: 13px; 
+      line-height: 1.7; 
+      white-space: normal; 
+      max-width: 700px; 
+    }
+    
+    /* Menu Title */
+    .primary-menu-title { 
+      font-weight: 700; 
+      font-size: 15px; 
+      margin-top: 30px; 
+      position: relative; 
+      display: inline-block; 
+      color: white; 
+      cursor: default; 
+    }
+    
+    .primary-menu-title::after { 
+      content: ""; 
+      position: absolute; 
+      bottom: -8px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      width: 130%; 
+      height: 3px; 
+      background-color: #a3c1e5; 
+      border-radius: 2px; 
+    }
+    
+    /* Footer Links */
+    .footer-navigation-links { 
+      margin-top: 5px; 
+      font-size: 13px; 
+      display: flex; 
+      flex-direction: column; 
+      gap: 6px; 
+      user-select: none; 
+      width: 100%; 
+      max-width: 320px; 
+      padding: 0 10px; 
+    }
+    
+    .footer-navigation-links div { 
+      cursor: default; 
+      color: #ffffff; 
+      font-weight: normal; 
+      padding-bottom: 4px; 
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3); 
+      margin: 0 8px; 
+    }
+    
+    /* Popup Menu */
+    .navigation-popup-menu { 
+      position: fixed; 
+      top: 60px; 
+      left: 0; 
+      width: 100%; 
+      height: 50vh; 
+      background-color: #f8fcff; 
+      display: none; 
+      flex-direction: column; 
+      justify-content: flex-start; 
+      align-items: center; 
+      padding-top: 30px; 
+      z-index: 999; 
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); 
+    }
+    
+    .navigation-popup-menu .popup-menu-item { 
+      font-size: 15px; 
+      color: #226699; 
+      margin: 15px 0; 
+      cursor: pointer; 
+      text-decoration: underline; 
+    }
+    
+    .navigation-popup-menu .popup-menu-login { 
+      background-color: #3c8dc4; 
+      color: white; 
+      padding: 8px 20px; 
+      border-radius: 12px; 
+      margin-top: 12px; 
+      font-size: 15px; 
+      cursor: pointer; 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center; 
+      text-decoration: none; 
+    }
+    
+    .navigation-popup-menu .popup-menu-login span { 
+      margin-right: 8px; 
+    }
+    
+    .navigation-popup-menu .popup-close-btn { 
+      position: absolute; 
+      top: 10px; 
+      right: 15px; 
+      font-size: 24px; 
+      color: #333; 
+      cursor: pointer; 
+    }
+    
+    /* Button Display States */
+    .tertiary-btn, .quaternary-btn { 
+      display: none; 
+    }
+    
+    /* Text Formatting */
+    .text-bold { 
+      font-weight: bold; 
+      color: black; 
+    }
+    
+    .text-normal { 
+      font-weight: normal; 
+      color: black; 
+    }
+    
+    .information-label.text-bold { 
+      margin-bottom: 5px; 
+    }
+    
+    .information-label.text-normal { 
+      margin-top: 10px; 
+    }
+    
+    /* Contact Section */
+    .contact-section-title { 
+      font-weight: 700; 
+      font-size: 15px; 
+      margin-top: 20px; 
+      color: white; 
+    }
+    
+    .contact-divider-line { 
+      width: 160px; 
+      height: 4px; 
+      background-color: #a3c1e5; 
+      margin: 6px auto 2px auto; 
+      border-radius: 1px; 
+    }
+    
+    .contact-information { 
+      font-size: 14px; 
+      line-height: 1.6; 
+      color: white; 
+      max-width: 320px; 
+      text-align: center; 
+      user-select: none; 
+    }
+
+    /* Loading Spinner Animation */
+    .spinner-loading {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+      margin-right: 8px; 
+      vertical-align: middle;
+      display: none; 
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Empty Field Error Styling */
+    .empty-field-error-message {
+      background-color: #feeeee; 
+      color: #a00000; 
+      text-align: center;
+      padding: 10px;
+      margin: 15px auto 10px;
+      border-radius: 5px;
+      width: calc(100% - 40px);
+      font-weight: normal; 
+      display: none; 
+      transition: margin-top 0.3s ease; 
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Header Navigation -->
+  <div class="top-header" id="mainHeader">
+    <img src="https://i.postimg.cc/hvXqx1Cv/1.png" alt="شعار صحة" class="brand-logo" />
+    <div class="hamburger-icon" id="hamburgerMenuIcon" onclick="toggleNavigationMenu()">&#9776;</div>
+  </div>
+
+  <!-- Navigation Popup Menu -->
+  <div class="navigation-popup-menu" id="navigationPopupMenu">
+    <div class="popup-close-btn" onclick="toggleNavigationMenu()">X</div>
+    <a href="https://www.seha.sa/ui#/services" class="popup-menu-item" onclick="toggleNavigationMenu()">الخدمات</a>
+    <a href="https://www.seha.sa/ui#/inquiries" class="popup-menu-item" onclick="toggleNavigationMenu()">الاستعلامات</a>
+    <a href="https://www.seha.sa/ui#/iamredirection/1" class="popup-menu-item" onclick="toggleNavigationMenu()">إنشاء حساب</a>
+    <a href="https://www.seha.sa/ui#/account/login" class="popup-menu-login" onclick="toggleNavigationMenu()"><span>👨‍💼</span>تسجيل الدخول</a>
+  </div>
+
+  <!-- Main Content Section -->
+  <div style="text-align: center;">
+    <h1>الإجازات المرضية</h1>
+  </div>
+  
+  <p class="primary-description">
+    خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي
+  </p>
+
+  <!-- Error Message for Empty Fields -->
+  <div id="emptyFieldsErrorMessage" class="empty-field-error-message">فضلا اكتب الرمز</div>
+
+  <!-- Form Input Fields -->
+  <div class="form-input-container" id="serviceCodeContainer">
+    <input id="serviceCode" type="text" class="form-input-field" placeholder="رمز الخدمة" maxlength="15" oninput="hideEmptyFieldError()" />
+  </div>
+  <div class="form-input-container" id="identityNumberContainer">
+    <input id="identityNumber" type="text" class="form-input-field" placeholder="رقم الهوية / الإقامة" maxlength="11" inputmode="text" oninput="hideEmptyFieldError()" />
+  </div>
+
+  <!-- Error Tab for Incorrect Data -->
+  <div id="errorMessageTab" class="error-message-tab">خطأ في البيانات</div>
+
+  <!-- Search Button -->
+  <button class="primary-btn" id="searchButton" onclick="validateAndCheckData()">
+    <span id="searchButtonText">استعلام</span>
+    <span id="loadingSpinnerElement" class="spinner-loading"></span>
+  </button>
+  
+  <!-- Back Button -->
+  <a href="https://www.seha.sa/ui#/inquiries" class="secondary-btn" id="backButton" style="text-decoration: none; display: block; text-align: center;">رجوع للاستعلامات</a>
+
+  <!-- Results Display -->
+  <div id="resultsDisplayBox" class="results-display-box"></div>
+
+  <!-- Additional Action Buttons -->
+  <button class="tertiary-btn" id="newSearchButton" onclick="performNewSearch()">استعلام جديد</button>
+  <a href="https://www.seha.sa/ui#/inquiries" class="quaternary-btn" id="backToListButton" style="text-decoration: none; display: none; text-align: center;">رجوع للاستعلامات</a>
+
+  <!-- Footer Section -->
+  <div class="page-footer">
+    <img src="https://www.seha.sa/assets/logo-white-CKxLEirV.svg" alt="شعار صحة" class="footer-brand-logo" style="margin-top: 60px;" />
+    <div class="mine-text">
+      منصة صحة تخدم جميع المنشأت الطبية من خلال تقديم الخدمات الصحية إلكترونياً لجميع المنشأت الطبية وتسعى إلى توحيد وأتمتة الاجراءات والخدمات بما في دوره رفع جودة الاداء وخفض التكاليف.
+    </div>
+    <div class="primary-menu-title">القائمة الرئيسية</div>
+    <div class="footer-navigation-links">
+      <div><a href="https://www.seha.sa/ui#/services" style="color: white; text-decoration: none;">الخدمات</a></div>
+      <div><a href="https://www.seha.sa/ui#/inquiries" style="color: white; text-decoration: none;">الاستعلامات</a></div>
+      <div><a href="https://www.seha.sa/ui#/faq" style="color: white; text-decoration: none;">الأسئلة الشائعة</a></div>
+      <div><a href="https://www.seha.sa/ui#/ContactUs" style="color: white; text-decoration: none;">تواصل معنا</a></div>
+    </div>
+    <div class="contact-section-title">تواصل معنا</div>
+    <div class="contact-divider-line"></div>
+    <div class="contact-section" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; width: 100%; max-width: 800px;">
+      <div style="text-align: right;">
+        <div class="contact-icon">
+          <i class=""></i>
+          <span> اتصال 920002005</span>
+        </div>
+        <div class="contact-icon">
+          <i class=""></i>
+          <span>  البريد الاكتروني support@seha.sa</span>
+        </div>
+        <div class="contact-icon">
+          <i class=""></i>
+          <span>وتساب 920002005</span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <img src="https://www.seha.sa/assets/lean-logo-De0NEeoI.svg" style="height: 50px;" alt="شعار لين" />
+        <div style="height: 50px; border-right: 2px solid white;"></div>
+        <img src="https://www.seha.sa/assets/MOH-logo-DYiHZCSg.svg" style="height: 50px;" alt="شعار الصحة" />
+      </div>
+      <div class="working-hours">
+        أوقات العمل : الأحد حتى الخميس 8 ص - 11 م
+        <br><br><br>
+      </div>
+    </div>
+    <div class="footer-bottom-text">
+      منصة صحة معتمدة من قبل وزارة الصحة 2025<br>
+      سياسة الخصوصية وشروط الإستخدام | دليل الاستخدام
+    </div>
+  </div>
+
+  <script>
+    // Navigation Menu Toggle Function
+    function toggleNavigationMenu() {
+      const navigationMenu = document.getElementById('navigationPopupMenu');
+      navigationMenu.style.display = navigationMenu.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // Initialize Application Data
+    function initializeApplicationData() {
+      const medicalLeaveData = [
+        {
+          leaveCode: "GSL32432147122",
+          idNumber: "1004322424",
+          name: "   سامية عيسي بن عطية الذبياني                                 ",
+          from: "2025-12-07",
+          to: "2025-12-07",
+          days: "1",
+          doctor: "   وليد عبدالحميد علي عبدالحميد                      ",
+          title: "طبيب عام    ",
+          date: "2025-12-07"
+        },
+                                                        {
+          leaveCode: "PSL33478521564",
+          idNumber: "1101678686",
+          name: "       نورا سعد سعيد الدوسري              ",
+          from: "2026-03-04",
+          to: "2026-03-05",
+          days: "2",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-03-05"
+        },
+                      {
+          leaveCode: "GSL33253268070",
+          idNumber: "1134680139",
+          name: "       لينا فهد عويجان العنزي                 ",
+          from: "2026-03-02",
+          to: "2026-03-02",
+          days: "1",
+          doctor: "  زينب محمد سالم آل ربح              ",
+          title: " طبيب عام  ",
+          date: "2026-03-02"
+        },
+                                            {
+          leaveCode: "GSL33253268070",
+          idNumber: "1038337489",
+          name: "       هدى منصور عبدالله                 ",
+          from: "2026-02-25",
+          to: "2026-02-26",
+          days: "2",
+          doctor: "  زينب محمد سالم آل ربح              ",
+          title: " طبيب عام  ",
+          date: "2026-02-26"
+        },
+                                                {
+          leaveCode: "PSL33253268070",
+          idNumber: "1101678686",
+          name: "       نورا سعد سعيد الدوسري              ",
+          from: "2026-02-25",
+          to: "2026-02-25",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-02-25"
+        },
+                                    {
+          leaveCode: "PSL32253368780",
+          idNumber: "1038337489",
+          name: "       هدى منصور عبدالله                 ",
+          from: "2026-01-08",
+          to: "2026-01-08",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-08"
+        },
+                                {
+          leaveCode: "GSL33645825375",
+          idNumber: "1090003425",
+          name: " عبدالله عايض عبدالرزاق الثبيتي           ",
+          from: "2026-02-23",
+          to: "2026-02-26",
+          days: "4",
+          doctor: "  سالم صالح محمد آل ربح              ",
+          title: " طبيب عام  ",
+          date: "2026-02-26"
+        },
+                                        {
+          leaveCode: "PSL33645825375",
+          idNumber: "1101678686",
+          name: "       نورا سعد سعيد الدوسري              ",
+          from: "2026-02-26",
+          to: "2026-02-26",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-02-26"
+        },
+                             {
+          leaveCode: "GSL34146985876",
+          idNumber: "1130480765",
+          name: "       جواهر عبدالله حسين الربيعي         ",
+          from: "2026-02-24",
+          to: "2026-02-24",
+          days: "1",
+          doctor: "  زينب يوسف حسين آل ربح              ",
+          title: " طبيب عام  ",
+          date: "2026-02-24"
+        },
+                     {
+          leaveCode: "PSL34146985876",
+          idNumber: "1131945949",
+          name: "       طلال احمد عبدالله القيصر         ",
+          from: "2026-02-23",
+          to: "2026-02-23",
+          days: "1",
+          doctor: "  زينب يوسف حسين آل ربح              ",
+          title: " طبيب عام  ",
+          date: "2026-02-23"
+        },
+                                          {
+          leaveCode: "PSL34146985876",
+          idNumber: "1128627823",
+          name: "       نوال علي عيسى عسيري         ",
+          from: "2026-02-09",
+          to: "2026-02-09",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-02-09"
+        },
+                                  {
+          leaveCode: "PSL33655286945",
+          idNumber: "1122981002",
+          name: "       خالد فهد سرحان الشيباني     ",
+          from: "2026-02-09",
+          to: "2026-02-09",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-02-09"
+        },
+                                   {
+          leaveCode: "PSL33655239567",
+          idNumber: "1128627823",
+          name: "       نوال علي عيسى عسيري                  ",
+          from: "2026-02-04",
+          to: "2026-02-04",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-02-04"
+        },
+                                     {
+          leaveCode: "PSL33655286945",
+          idNumber: "1101678686",
+          name: "       نورا سعد سعيد الدوسري              ",
+          from: "2026-02-08",
+          to: "2026-02-08",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-02-08"
+        },
+                              {
+          leaveCode: "PSL25452352751",
+          idNumber: "1130665738",
+          name: "     جواهر علي محمد شراحيلي    ",
+          from: "2026-02-08",
+          to: "2026-02-08",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-02-08"
+        },
+                      {
+          leaveCode: "GSL25452352751",
+          idNumber: "1084190667",
+          name: "       علي سعد ناصر الصخيف                     ",
+          from: "2026-01-01",
+          to: "2026-01-01",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-01"
+        },
+                             {
+          leaveCode: "PSL32436355486",
+          idNumber: "1101678686",
+          name: "       نورا سعد سعيد الدوسري              ",
+          from: "2026-01-28",
+          to: "2026-01-28",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-28"
+        },
+                            {
+          leaveCode: "PSL32253368780",
+          idNumber: "1038337489",
+          name: "       هدى منصور عبدالله                 ",
+          from: "2026-01-08",
+          to: "2026-01-08",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-08"
+        },
+                                      {
+          leaveCode: "PSL32432147122",
+          idNumber: "1101678686",
+          name: "       نورا سعد سعيد الدوسري              ",
+          from: "2026-01-08",
+          to: "2026-01-08",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-08"
+        },
+                                      {
+          leaveCode: "PSL25452352751",
+          idNumber: "1099144477",
+          name: "       فيصل حسن علي الحلوي                 ",
+          from: "2026-01-07",
+          to: "2026-01-07",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-07"
+        },
+                               {
+          leaveCode: "PSL25556481399",
+          idNumber: "1120192362",
+          name: "       طلال نواف ضاحي الصالح                  ",
+          from: "2025-12-23",
+          to: "2025-12-23",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2025-12-23"
+        },
+                              {
+          leaveCode: "PSL25452352751",
+          idNumber: "1101678686",
+          name: "       نورا سعد سعيد الدوسري              ",
+          from: "2026-01-07",
+          to: "2026-01-07",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-07"
+        },
+                        {
+          leaveCode: "PSL25556481399",
+          idNumber: "1098838145",
+          name: "فهد عبدالله حمد الدوسري     ",
+          from: "2026-01-04",
+          to: "2026-01-04",
+          days: "1",
+          doctor: " محمد رياض عبدالعليم محمد        ",
+          title: "طبيب عام ",
+          date: "2026-01-04"
+        },
+                                {
+          leaveCode: "PSL25556481399",
+          idNumber: "1101678686",
+          name: "       نورا سعد سعيد الدوسري              ",
+          from: "2026-01-04",
+          to: "2026-01-04",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-04"
+        },
+                        {
+          leaveCode: "PSL25556481399",
+          idNumber: "1073279695",
+          name: "       محمد عايض عبدالرزاق الثبيتي           ",
+          from: "2025-12-31",
+          to: "2026-01-01",
+          days: "2",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2026-01-01"
+        },
+                {
+          leaveCode: "PSL25111711643",
+          idNumber: "1073279695",
+          name: "       محمد عايض عبدالرزاق الثبيتي           ",
+          from: "2025-12-28",
+          to: "2025-12-30",
+          days: "3",
+          doctor: "  محمد رياض عبدالعليم محمد           ",
+          title: " طبيب عام  ",
+          date: "2025-12-30"
+        },
+                        {
+          leaveCode: "PSL22030105101",
+          idNumber: "1118281433",
+          name: "    طه عدنان - الصايع                                       ",
+          from: "2025-12-21",
+          to: "2025-12-21",
+          days: "1",
+          doctor: " ابراهيم الدسوقى محمد دياب                           ",
+          title: "طبيب عام    ",
+          date: "2025-12-21"
+        },
+                {
+          leaveCode: "PSL23123964741",
+          idNumber: "2278455221",
+          name: "    عائشه عبد الجواد الشيخ                                    ",
+          from: "2025-12-21",
+          to: "2025-12-21",
+          days: "1",
+          doctor: " ماهر محمد منصور علي                        ",
+          title: "طبيب عام    ",
+          date: "2025-12-21"
+        },
+                  {
+          leaveCode: "PSL23530875216",
+          idNumber: "2309653596",
+          name: "رغد عبدالجواد الشيخ           ",
+          from: "2025-12-21",
+          to: "2025-12-21",
+          days: "1",
+          doctor: "سميرة ناجي محسن الطالعي          ",
+          title: "طبيب عام",
+          date: "2025-12-21"
+        },
+                                                {
+          leaveCode: "GSL32212475212",
+          idNumber: "1140017623",
+          name: "   منصور صالح معيوف العنزي                                        ",
+          from: "2025-12-18",
+          to: "2025-12-18",
+          days: "1",
+          doctor: "   عبير محمود ناصر شعبان                            ",
+          title: "طبيب باطنية    ",
+          date: "2025-12-18"
+        },
+                       {
+          leaveCode: "GSL23121361082",
+          idNumber: "1128420245",
+          name: "   مريم عايد رفاع الرشيدي                   ",
+          from: "2025-09-07",
+          to: "2025-09-07",
+          days: "1",
+          doctor: "  منيره سليمان محمد منيح        ",
+          title: "طبيب عام  ",
+          date: "2025-09-07"
+        },
+                                                        {
+          leaveCode: "GSL23807321745",
+          idNumber: "1128420245",
+          name: "   مريم عايد رفاع الرشيدي                   ",
+          from: "2025-09-28",
+          to: "2025-09-28",
+          days: "1",
+          doctor: "  منيره سليمان محمد منيح        ",
+          title: "طبيب عام  ",
+          date: "2025-09-28"
+        },
+                                                        {
+          leaveCode: "GSL34471369871",
+          idNumber: "1128420245",
+          name: "   مريم عايد رفاع الرشيدي                   ",
+          from: "2025-12-08",
+          to: "2025-12-08",
+          days: "1",
+          doctor: "  منيره سليمان محمد منيح        ",
+          title: "طبيب عام  ",
+          date: "2025-12-08"
+        },
+                                                        {
+          leaveCode: "GSL32421571234",
+          idNumber: "1128420245",
+          name: "   مريم عايد رفاع الرشيدي                   ",
+          from: "2025-12-01",
+          to: "2025-12-01",
+          days: "1",
+          doctor: "  منيره سليمان محمد منيح        ",
+          title: "طبيب عام  ",
+          date: "2025-12-01"
+        },
+                                                {
+          leaveCode: "GSL31471235687",
+          idNumber: "1128420245",
+          name: "   مريم عايد رفاع الرشيدي                   ",
+          from: "2025-11-17",
+          to: "2025-11-17",
+          days: "1",
+          doctor: "  منيره سليمان محمد منيح        ",
+          title: "طبيب عام  ",
+          date: "2025-11-17"
+        },
+                                                {
+          leaveCode: "GSL32212475212",
+          idNumber: "1041667922",
+          name: "   أسماء سعد هادي ال عباس               ",
+          from: "2025-12-07",
+          to: "2025-12-07",
+          days: "1",
+          doctor: "  محمد علي محمد مغرم        ",
+          title: "طبيب باطنية  ",
+          date: "2025-12-07"
+        },
+                                        {
+          leaveCode: "GSL31417845136",
+          idNumber: "1041667922",
+          name: "   أسماء سعد هادي ال عباس               ",
+          from: "2025-12-09",
+          to: "2025-12-09",
+          days: "1",
+          doctor: "  محمد علي محمد مغرم        ",
+          title: "طبيب باطنية  ",
+          date: "2025-12-09"
+        },
+                                {
+          leaveCode: "PSL59953234824",
+          idNumber: "1121388159",
+          name: "   فهد خالد سعد الطالحي            ",
+          from: "2025-12-14",
+          to: "2025-12-14",
+          days: "1",
+          doctor: "  عبدالله صالح الغامدي      ",
+          title: "طبيب عام  ",
+          date: "2025-12-14"
+        },
+                        {
+          leaveCode: "PSL59953212832",
+          idNumber: "1121388159",
+          name: "   فهد خالد سعد الطالحي            ",
+          from: "2025-12-10",
+          to: "2025-12-10",
+          days: "1",
+          doctor: "  عبدالله صالح الغامدي      ",
+          title: "طبيب عام  ",
+          date: "2025-12-10"
+        },
+                {
+          leaveCode: "GSL31471235687",
+          idNumber: "1125138145",
+          name: "   اصيل علي محمد الشهري               ",
+          from: "2025-12-14",
+          to: "2025-12-15",
+          days: "2",
+          doctor: "  منيره سليمان محمد منيح           ",
+          title: "طبيب عام  ",
+          date: "2025-12-14"
+        },
+                                        {
+          leaveCode: "GSL312847854157",
+          idNumber: "1130590340",
+          name: "   ريم حسن ظافر الشهري                                     ",
+          from: "2025-09-22",
+          to: "2025-09-22",
+          days: "1",
+          doctor: "   عبير محمود ناصر شعبان                            ",
+          title: "طبيب عام    ",
+          date: "2025-09-22"
+        },
+                                                {
+          leaveCode: "GSL32142175368",
+          idNumber: "1130590340",
+          name: "   ريم حسن ظافر الشهري                                     ",
+          from: "2025-09-15",
+          to: "2025-09-15",
+          days: "1",
+          doctor: "   منيرة سليمان محمد منيح                                  ",
+          title: "طبيب عام    ",
+          date: "2025-09-15"
+        },
+                                                {
+          leaveCode: "GSL29184756981",
+          idNumber: "1130590340",
+          name: "   ريم حسن ظافر الشهري                                     ",
+          from: "2025-12-01",
+          to: "2025-12-01",
+          days: "1",
+          doctor: "   عصام مطير سلامة البلوي                               ",
+          title: "طبيب عام    ",
+          date: "2025-12-01"
+        },
+                                        {
+          leaveCode: "GSL25101543138",
+          idNumber: "1130590340",
+          name: "   ريم حسن ظافر الشهري                                     ",
+          from: "2025-11-16",
+          to: "2025-11-16",
+          days: "1",
+          doctor: "   عصام مطير سلامة البلوي                               ",
+          title: "طبيب عام    ",
+          date: "2025-11-16"
+        },
+                                        {
+          leaveCode: "GSL331247854123",
+          idNumber: "1133017887",
+          name: "   فاطمة عبدالله ظافر ال شيبان                                        ",
+          from: "2025-12-02",
+          to: "2025-12-02",
+          days: "1",
+          doctor: "   عبير محمود ناصر شعبان                            ",
+          title: "طبيب عام    ",
+          date: "2025-12-02"
+        },
+                        {
+          leaveCode: "GSL32432147122",
+          idNumber: "1128822184",
+          name: "   عبدالله عيسى عبدالله الزهراني                                             ",
+          from: "2025-12-12",
+          to: "2025-12-12",
+          days: "1",
+          doctor: "   ارقم حسن محمود محمد                         ",
+          title: "طبيب عام    ",
+          date: "2025-12-12"
+        },
+                        {
+          leaveCode: "GSL32432147122",
+          idNumber: "2158802948",
+          name: "   أحمد يونس شعيب                                             ",
+          from: "2025-12-10",
+          to: "2025-12-11",
+          days: "2",
+          doctor: "   ارقم حسن محمود محمد                         ",
+          title: "طبيب عام    ",
+          date: "2025-12-10"
+        },
+                                {
+          leaveCode: "GSL331247854123",
+          idNumber: "1130590340",
+          name: "   ريم حسن ظافر الشهري                                     ",
+          from: "2025-09-28",
+          to: "2025-09-28",
+          days: "1",
+          doctor: "   عبير محمود ناصر شعبان                            ",
+          title: "طبيب عام    ",
+          date: "2025-09-28"
+        },
+                {
+          leaveCode: "GSL32432147122",
+          idNumber: "1122599580",
+          name: "   شهد عبدالعزيز  المطيلق                                          ",
+          from: "2025-12-09",
+          to: "2025-12-09",
+          days: "1",
+          doctor: "   ارقم حسن محمود محمد                         ",
+          title: "طبيب عام    ",
+          date: "2025-12-09"
+        },
+                        {
+          leaveCode: "GSL32432147122",
+          idNumber: "1130590340",
+          name: "   ريم حسن ظافر الشهري                                     ",
+          from: "2025-10-05",
+          to: "2025-10-05",
+          days: "1",
+          doctor: "   ارقم حسن محمود محمد                         ",
+          title: "طبيب عام    ",
+          date: "2025-10-05"
+        },
+                {
+          leaveCode: "GSL32421756521",
+          idNumber: "1193920269",
+          name: "   رانية سعود عشوان العنزي                                 ",
+          from: "2025-11-18",
+          to: "2025-11-18",
+          days: "1",
+          doctor: "   بندر محمد سعد الزائري                      ",
+          title: "باطنية     ",
+          date: "2025-11-18"
+        },
+                {
+          leaveCode: "PSL45522834134",
+          idNumber: "1204998437",
+          name: "   ريم ابراهيم موسى عسيري                              ",
+          from: "2025-11-13",
+          to: "2025-11-13",
+          days: "1",
+          doctor: "   امل رياض عبدالعليم محمد                   ",
+          title: "طبيب عام    ",
+          date: "2025-11-13"
+        },
+                                                {
+          leaveCode: "PSL22030875213",
+          idNumber: "2309653596",
+          name: "رغد عبدالجواد الشيخ           ",
+          from: "2025-12-07",
+          to: "2025-12-07",
+          days: "1",
+          doctor: "سميرة ناجي محسن الطالعي          ",
+          title: "طبيب عام",
+          date: "2025-12-07"
+        },
+                                                {
+          leaveCode: "PSL32514721322",
+          idNumber: "2055032672",
+          name: "فواز حميد عسكر عبدالله           ",
+          from: "2025-12-04",
+          to: "2025-12-04",
+          days: "1",
+          doctor: "سميرة ناجي محسن الطالعي          ",
+          title: "طبيب عام",
+          date: "2025-12-04"
+        },
+                                {
+          leaveCode: "PSL32432147122",
+          idNumber: "1112398290",
+          name: "مبارك حمدان مبارك اليوبي           ",
+          from: "2025-12-11",
+          to: "2025-12-13",
+          days: "3",
+          doctor: "وليد عبدالحميد علي عبدالحميد          ",
+          title: "طبيب عام",
+          date: "2025-12-11"
+        },
+                        {
+          leaveCode: "GSL32212475212",
+          idNumber: "1139033961",
+          name: "ملاك ياسين ناصر الحرازي        ",
+          from: "2025-11-17",
+          to: "2025-11-17",
+          days: "1",
+          doctor: "علي بن علي محمد زيدان      ",
+          title: "طبيب باطنية",
+          date: "2025-11-17"
+        },
+                                {
+          leaveCode: "GSL32147142131",
+          idNumber: "1139033961",
+          name: "ملاك ياسين ناصر الحرازي        ",
+          from: "2025-09-22",
+          to: "2025-09-22",
+          days: "1",
+          doctor: "سميرة ناجي محسن الطالعي          ",
+          title: "طبيب باطنية",
+          date: "2025-09-22"
+        },
+                                        {
+          leaveCode: "GSL32432147122",
+          idNumber: "1139033961",
+          name: "ملاك ياسين ناصر الحرازي        ",
+          from: "2025-12-01",
+          to: "2025-12-01",
+          days: "1",
+          doctor: "سميرة ناجي محسن الطالعي          ",
+          title: "طبيب باطنية",
+          date: "2025-12-01"
+        },
+                        {
+          leaveCode: "GSL24541234725",
+          idNumber: "1135205407",
+          name: "معاد مدواي حمد المنتشري        ",
+          from: "2025-12-07",
+          to: "2025-12-07",
+          days: "1",
+          doctor: "محمد رياض عبدالعليم محمد      ",
+          title: "طبيب عام",
+          date: "2025-12-07"
+        },
+                                {
+          leaveCode: "GSL21247412354",
+          idNumber: "1135205407",
+          name: "معاد مدواي حمد المنتشري        ",
+          from: "2025-10-13",
+          to: "2025-10-13",
+          days: "1",
+          doctor: "محمد رياض عبدالعليم محمد      ",
+          title: "طبيب عام",
+          date: "2025-10-13"
+        },
+                                {
+          leaveCode: "GSL24541234725",
+          idNumber: "1135205407",
+          name: "معاد مدواي حمد المنتشري        ",
+          from: "2025-12-07",
+          to: "2025-12-07",
+          days: "1",
+          doctor: "محمد رياض عبدالعليم محمد      ",
+          title: "طبيب عام",
+          date: "2025-12-07"
+        },
+                                        {
+          leaveCode: "GSL23124751241",
+          idNumber: "1135205407",
+          name: "معاد مدواي حمد المنتشري        ",
+          from: "2025-11-03",
+          to: "2025-11-03",
+          days: "1",
+          doctor: "محمد رياض عبدالعليم محمد      ",
+          title: "طبيب عام",
+          date: "2025-11-03"
+        },
+                {
+          leaveCode: "GSL22526671215",
+          idNumber: "1121884256",
+          name: "نبأ محمد علي المضوي     ",
+          from: "2025-11-30",
+          to: "2025-11-30",
+          days: "1",
+          doctor: "ماهر محمد منصور علي   ",
+          title: "طبيب عام",
+          date: "2025-11-30"
+        },
+        {
+          leaveCode: "GSL24120565005",
+          idNumber: "1128519038",
+          name: "    عفراء سليمان عبدالله الصيعري                                    ",
+          from: "2025-11-10",
+          to: "2025-11-10",
+          days: "1",
+          doctor: " ماهر محمد منصور علي                        ",
+          title: "طبيب عام    ",
+          date: "2025-11-10"
+        },
+                {
+          leaveCode: "GSL24120565005",
+          idNumber: "1130911702",
+          name: "    لولوه سلطان عبدالله الثنيان                                       ",
+          from: "2025-12-01",
+          to: "2025-12-01",
+          days: "1",
+          doctor: " محمد رياض عبدالعليم محمد                           ",
+          title: "طبيب عام    ",
+          date: "2025-12-01"
+        },
+        {
+          leaveCode: "PSL25111711235",
+          idNumber: "1111622070",
+          name: "مبارك عبيد مفرج الدوسري  ",
+          from: "2025-11-29",
+          to: "2025-11-29",
+          days: "1",
+          doctor: "محمد رياض عبدالعليم محمد",
+          title: "نائب",
+          date: "2025-11-29"
+        },
+        {
+          leaveCode: "PSL24120521605",
+          idNumber: "1204998437",
+          name: "    ريم ابراهيم موسى عسيري                                 ",
+          from: "2025-11-03",
+          to: "2025-11-03",
+          days: "1",
+          doctor: " امل رياض عبدالعليم محمد                     ",
+          title: "طبيب عام    ",
+          date: "2025-11-03"
+        },
+        {
+          leaveCode: "PSL24123964805",
+          idNumber: "1204998437",
+          name: "    ريم ابراهيم موسى عسيري                                 ",
+          from: "2025-11-10",
+          to: "2025-11-10",
+          days: "1",
+          doctor: " امل رياض عبدالعليم محمد                     ",
+          title: "طبيب عام    ",
+          date: "2025-11-10"
+        },
+               {
+          leaveCode: "PSL22526671215",
+          idNumber: "2309653596",
+          name: "    رغد عبدالجواد الشيخ                                       ",
+          from: "2025-11-30",
+          to: "2025-11-30",
+          days: "1",
+          doctor: " ماهر محمد منصور علي                        ",
+          title: "طبيب عام    ",
+          date: "2025-11-30"
+        },
+        {
+          leaveCode: "PSL24123964805",
+          idNumber: "2278455221",
+          name: "    عائشه عبد الجواد الشيخ                                    ",
+          from: "2025-11-20",
+          to: "2025-11-20",
+          days: "1",
+          doctor: " ماهر محمد منصور علي                        ",
+          title: "طبيب عام    ",
+          date: "2025-11-20"
+        },
+        {
+          leaveCode: "PSL66467891735",
+          idNumber: "1123972026",
+          name: "شوق محمد سويلم الكلوي",
+          from: "2025-11-30",
+          to: "2025-11-30",
+          days: "1",
+          doctor: "ريحان شريف محمد اسماعيل     ",
+          title: "طب بشري",
+          date: "2025-11-30"
+        },
+        {
+          leaveCode: "PSL24120566504",
+          idNumber: "1204998437",
+          name: "       محمد عايض عبدالرزاق الثبيتي           ",
+          from: "2025-10-15",
+          to: "2025-10-16",
+          days: "2",
+          doctor: "  سعد محمد مسعود         ",
+          title: " طبيب عام  ",
+          date: "2025-10-16"
+        },
+        {
+leaveCode: "PSL24120564487",
+          idNumber: "1073279695",
+          name: "       محمد عايض عبدالرزاق الثبيتي           ",
+          from: "2025-10-29",
+          to: "2025-10-29",
+          days: "1",
+          doctor: "  سليمان احمد الزهراني           ",
+          title: " طبيب عام  ",
+          date: "2025-10-29"
+        },
+        {
+          leaveCode: "GSL25593541786",
+          idNumber: "1135855789",
+          name: "    محمد سعيد مشبب الأحمري               ",
+          from: "2025-10-28",
+          to: "2025-10-29",
+          days: "2",
+          doctor: "خالد طلعت عيسي العارضي           ",
+          title: "إستشاري   ",
+          date: "2025-10-29"
+        },
+        {
+         leaveCode: "GSL28642725613",
+          idNumber: "1185124755",
+          name: "    سعيد عباد هاشم الرحمان                   ",
+          from: "2025-10-29",
+          to: "2025-10-29",
+          days: "1",
+          doctor: "  مروه عبد الرحمن الالوسي         ",
+          title: "إستشاري   ",
+          date: "2025-10-29"
+        },
+        {
+         leaveCode: "GSL22417524356",
+          idNumber: "1172547364",
+          name: "    وتين عباد هاشم الرحماني                ",
+          from: "2025-10-30",
+          to: "2025-10-30",
+          days: "1",
+          doctor: "  محمد عوض محمد الحسن            ",
+          title: "طبيب اطفال   ",
+          date: "2025-10-30"
+        },
+        {
+          leaveCode: "GSL45571322514",
+          idNumber: "1122845330",
+          name: "      امل معوض سعد الزرفاني         ",
+          from: "2025-09-05",
+          to: "2025-09-05",
+          days: "1",
+          doctor: "  محمد احمد السنباني        ",
+          title: " طبيب عام ",
+          date: "2025-09-05"
+        },
+        {
+          leaveCode: "PSL12345678910",
+          idNumber: "7769563388",
+          name: "   عبدالله نبيل محمد عبدالواسع                  ",
+          from: "2025-09-19",
+          to: "2025-09-19",
+          days: "1",
+          doctor: "عبدالله نبيل محمد عبدالواسع         ",
+          title: " طبيب عام ",
+          date: "2025-09-19"
+        },
+        {
+          leaveCode: "PSL66467899722",
+          idNumber: "1086901608",
+          name: "نايف قاسم علي شعواني ",
+          from: "2025-11-30",
+          to: "2025-12-01",
+          days: "2",
+          doctor: "ريحان شريف محمد اسماعيل",
+          title: "طب بشري",
+          date: "2025-11-30"
+        },
+                {
+          leaveCode: "GPL88223791200",
+          idNumber: "1122139015",
+          name: "   خالد عزيز محمد المالكي      ",
+          from: "2025-06-13",
+          to: "2025-06-14",
+          days: "2",
+          doctor: "  هشام العزب   ",
+          title: "طب بشري ",
+          date: "2025-06-13"
+        },
+                {
+          leaveCode: "GSL25060111760",
+          idNumber: "1090361872",
+          name: "     هنادي محمد بالغيث القرني       ",
+          from: "2025-06-10",
+          to: "2025-06-10",
+          days: "1",
+          doctor: "أمان الله خان   ",
+          title: "طب بشري ",
+          date: "2025-06-10"
+        },
+                                {
+          leaveCode: "GSL32421756521",
+          idNumber: "1172547364",
+          name: "     وتين عباد هاشم الرحماني             ",
+          from: "2025-12-04",
+          to: "2025-12-04",
+          days: "1",
+          doctor: "بندر محمد سعد الزائري     ",
+          title: "باطنية  ",
+          date: "2025-12-04"
+        },
+                                {
+          leaveCode: "GSL21247412354",
+          idNumber: "1127912036",
+          name: "     ريان عبدالله ناصر العليان                   ",
+          from: "2025-12-04",
+          to: "2025-12-04",
+          days: "1",
+          doctor: "محمد رياض عبد العليم محمد        ",
+          title: "طبيب عام  ",
+          date: "2025-12-04"
+        },
+                        {
+          leaveCode: "GSL24120565005",
+          idNumber: "1116998913",
+          name: "     راشد ابراهيم سعد الكريع                ",
+          from: "2025-12-02",
+          to: "2025-12-02",
+          days: "1",
+          doctor: "محمد رياض عبد العليم محمد        ",
+          title: "طبيب عام  ",
+          date: "2025-12-02"
+        },
+                                {
+          leaveCode: "GSL25421753214",
+          idNumber: "1185124755",
+          name: "     سعيد عباد هاشم الرحماني          ",
+          from: "2025-12-04",
+          to: "2025-12-04",
+          days: "1",
+          doctor: "بندر محمد سعد الزائري     ",
+          title: "باطنية  ",
+          date: "2025-12-04"
+        },
+                {
+          leaveCode: "GSL24120565005",
+          idNumber: "2284899560",
+          name: "   هيا محمد الياس سلام            ",
+          from: "2025-11-30",
+          to: "2025-12-03",
+          days: "4",
+          doctor: "  محمد رياض عبدالعليم محمد     ",
+          title: "طبيب عام  ",
+          date: "2025-12-03"
+        },
+                {
+          leaveCode: "GSL24123964805",
+          idNumber: "1129080147",
+          name: "      ضي فيصل خلف العازمي         ",
+          from: "2025-11-18",
+          to: "2025-11-18",
+          days: "1",
+          doctor: "امل رياض عبدالعليم محمد     ",
+          title: "طبيب عام  ",
+          date: "2025-11-18"
+        },
+                {
+          leaveCode: "GSL25065528128",
+          idNumber: "1118202231",
+          name: "   نواف سعيد فازع المطيري         ",
+          from: "2025-06-11",
+          to: "2025-06-12",
+          days: "2",
+          doctor: "محمد جمال خلف   ",
+          title: "طب بشري ",
+          date: "2025-06-11"
+        },
+                {
+          leaveCode: "GPL88223791200",
+          idNumber: "1118202231",
+          name: "   نواف سعيد فازع المطيري        ",
+          from: "2025-06-03",
+          to: "2025-06-03",
+          days: "1",
+          doctor: "محمد جمال خلف   ",
+          title: "طب بشري ",
+          date: "2025-06-03"
+        },
+                {
+          leaveCode: "PSL25111711298",
+          idNumber: "1135758827",
+          name: "   وليد علي حسن عسيري            ",
+          from: "2025-11-26",
+          to: "2025-11-26",
+          days: "1",
+          doctor: "   محمد رياض عبدالعليم محمد   ",
+          title: "نائب   ",
+          date: "2025-11-26"
+        },
+                {
+          leaveCode: "GSL96543180027",
+          idNumber: "1129764823",
+          name: "      اريام ابراهيم احمد الناشري         ",
+          from: "2025-11-05",
+          to: "2025-11-05",
+          days: "1",
+          doctor: "  أمل عبداللة القاسم    ",
+          title: "طبيب عام  ",
+          date: "2025-11-05"
+        },
+                {
+          leaveCode: "PSL25060111760",
+          idNumber: "2192634653",
+          name: "      راما نائل سعدو المصري         ",
+          from: "2025-11-26",
+          to: "2025-11-27",
+          days: "2",
+          doctor: "محمد عبدالله القاسم        ",
+          title: "طبيب اسنان  ",
+          date: "2025-11-27"
+        },
+                {
+          leaveCode: "GSL67987664312",
+          idNumber: "1135345088",
+          name: " عبداللطيف عبدالقادر عبدالسلام      ",
+          from: "2025-09-04",
+          to: "2025-09-04",
+          days: "1",
+          doctor: "  عبدالله صالح الغامدي      ",
+          title: "طبيب عام  ",
+          date: "2025-09-04"
+        },
+                {
+          leaveCode: "GSL87854566931",
+          idNumber: "1127706503",
+          name: "   راكان سرحان فهد الشيباني         ",
+          from: "2025-09-28",
+          to: "2025-09-28",
+          days: "1",
+          doctor: "  عبدالله صالح الغامدي      ",
+          title: "طبيب عام  ",
+          date: "2025-09-28"
+        },
+                        {
+          leaveCode: "PSL25111711646",
+          idNumber: "1085184966",
+          name: "      عبدالعزيز علي عوضه الاسمري         ",
+          from: "2025-11-25",
+          to: "2025-11-25",
+          days: "1",
+          doctor: "  محمد رياض عبدالعليم محمد    ",
+          title: "طبيب اسنان  ",
+          date: "2025-11-25"
+        },
+                        {
+          leaveCode: "GSL66346495423",
+          idNumber: "1109811339",
+          name: "        تهاني عبدربه الصيعري          ",
+          from: "2025-11-17",
+          to: "2025-11-17",
+          days: "1",
+          doctor: "  امل صالح الغامدي    ",
+          title: "طبيب عام  ",
+          date: "2025-11-17"
+        },
+                {
+          leaveCode: "GSL59953212832",
+          idNumber: "1068845344",
+          name: "   نهال عقيل العتيبي            ",
+          from: "2025-11-16",
+          to: "2025-11-16",
+          days: "1",
+          doctor: " امل صالح الغامدي       ",
+          title: "طبيب عام ",
+          date: "2025-11-16"
+        },
+                        {
+          leaveCode: "GSL59953212832",
+          idNumber: "1100498482",
+          name: "حصه سعد عبدالله الطمره   ",
+          from: "2025-11-15",
+          to: "2025-11-15",
+          days: "1",
+          doctor: " أمل صالح الغامدي           ",
+          title: "طبيب عام ",
+          date: "2025-11-15"
+        },
+                        {
+          leaveCode: "GSL88055468431",
+          idNumber: "1098838145",
+          name: "فهد عبدالله حمد الدوسري     ",
+          from: "2025-11-15",
+          to: "2025-11-15",
+          days: "1",
+          doctor: " عبدالله صالح الغامدي      ",
+          title: "طبيب عام ",
+          date: "2025-11-15"
+        },
+                        {
+          leaveCode: "GSL59953212832",
+          idNumber: "1135464368",
+          name: "   يزيد محمد عبدالله الاحمري               ",
+          from: "2025-09-24",
+          to: "2025-10-08",
+          days: "15",
+          doctor: "  عبدالله صالح الغامدي         ",
+          title: "طبيب عام ",
+          date: "2025-10-08"
+        },
+                        {
+          leaveCode: "GSL59953212832",
+          idNumber: "1120599236",
+          name: "   مؤيد صالح احمد السفري            ",
+          from: "2025-11-14",
+          to: "2025-11-14",
+          days: "1",
+          doctor: " عبدالله صالح الغامدي       ",
+          title: "طبيب عام ",
+          date: "2025-11-14"
+        },
+                        {
+          leaveCode: "GSL59953212832",
+          idNumber: "1145629803",
+          name: "   ريسان علي صالح الزهراني             ",
+          from: "2025-11-13",
+          to: "2025-11-13",
+          days: "1",
+          doctor: " عبدالله صالح الغامدي       ",
+          title: "طبيب عام ",
+          date: "2025-11-13"
+        },
+                        {
+          leaveCode: "GSL59952535236",
+          idNumber: "1135205407",
+          name: "   معاذ مدواي حمد المنتشري            ",
+          from: "2025-10-22",
+          to: "2025-10-22",
+          days: "1",
+          doctor: " عبدالله صالح الغامدي       ",
+          title: "طبيب عام ",
+          date: "2025-10-22"
+        },
+                        {
+          leaveCode: "GSL59925856451",
+          idNumber: "1135205407",
+          name: "   معاذ مدواي حمد المنتشري            ",
+          from: "2025-10-29",
+          to: "2025-10-29",
+          days: "1",
+          doctor: " عبدالله صالح الغامدي       ",
+          title: "طبيب عام ",
+          date: "2025-10-29"
+        },
+                        {
+          leaveCode: "GSL59953212832",
+          idNumber: "1135205407",
+          name: "   معاذ مدواي حمد المنتشري               ",
+          from: "2025-11-10",
+          to: "2025-11-10",
+          days: "1",
+          doctor: " عبدالله صالح الغامدي              ",
+          title: "طبيب عام ",
+          date: "2025-11-10"
+        },
+      ];
+      localStorage.setItem("leaveData", JSON.stringify(medicalLeaveData));
+    }
+
+    // Main Data Validation and Search Function
+    function validateAndCheckData() {
+      const identityNumberInput = document.getElementById('identityNumber');
+      const serviceCodeInput = document.getElementById('serviceCode');
+      const identityNumber = identityNumberInput.value.trim();
+      const serviceCode = serviceCodeInput.value.trim();
+      const emptyFieldsErrorMessage = document.getElementById('emptyFieldsErrorMessage');
+      const searchButton = document.getElementById('searchButton');
+      const searchButtonText = document.getElementById('searchButtonText');
+      const loadingSpinnerElement = document.getElementById('loadingSpinnerElement');
+      const errorMessageTab = document.getElementById("errorMessageTab");
+      const resultsDisplayBox = document.getElementById("resultsDisplayBox");
+      const serviceCodeContainer = document.getElementById('serviceCodeContainer');
+      const identityNumberContainer = document.getElementById('identityNumberContainer');
+
+      // Validate empty fields first
+      if (!identityNumber || !serviceCode) {
+        emptyFieldsErrorMessage.style.display = 'block';
+        serviceCodeContainer.style.marginTop = '5px'; 
+        identityNumberContainer.style.marginTop = '5px'; 
+        errorMessageTab.style.display = 'none';
+        resultsDisplayBox.style.display = 'none';
+        return;
+      } else {
+        emptyFieldsErrorMessage.style.display = 'none';
+        serviceCodeContainer.style.marginTop = ''; 
+        identityNumberContainer.style.marginTop = ''; 
+      }
+
+      // Start loading state
+      loadingSpinnerElement.style.display = 'inline-block';
+      searchButton.classList.add('loading');
+      searchButton.disabled = true;
+      errorMessageTab.style.display = "none"; 
+      resultsDisplayBox.style.display = "none";
+
+      // Simulate processing delay
+      setTimeout(() => {
+        const storedMedicalLeaveData = JSON.parse(localStorage.getItem("leaveData")) || [];
+        const searchResult = storedMedicalLeaveData.find(record => record.leaveCode === serviceCode && record.idNumber === identityNumber);
+
+        // End loading state
+        loadingSpinnerElement.style.display = 'none';
+        searchButton.classList.remove('loading');
+        searchButton.disabled = false;
+
+        // Process search results
+        if (searchResult) {
+          resultsDisplayBox.innerHTML = `
+            <div class="information-label text-bold">الاسم</div><div class="information-data text-normal">${searchResult.name.trim()}</div>
+            <div class="information-label text-bold">تاريخ إصدار تقرير الاجازة</div><div class="information-data text-normal">${searchResult.date}</div>
+            <div class="information-label text-bold">تبدأ من</div><div class="information-data text-normal">${searchResult.from}</div>
+            <div class="information-label text-bold">وحتى</div><div class="information-data text-normal">${searchResult.to}</div>
+            <div class="information-label text-bold">المدة بالأيام</div><div class="information-data text-normal">${searchResult.days}</div>
+            <div class="information-label text-bold">اسم الطبيب</div><div class="information-data text-normal">${searchResult.doctor.trim()}</div>
+            <div class="information-label text-bold">المسمى الوظيفي</div><div class="information-data text-normal">${searchResult.title.trim()}</div>
+          `;
+          resultsDisplayBox.style.display = "block";
+          errorMessageTab.style.display = "none";
+          document.getElementById('searchButton').style.display = 'none';
+          document.getElementById('backButton').style.display = 'none';
+          document.getElementById('newSearchButton').style.display = 'block';
+          document.getElementById('backToListButton').style.display = 'block';
+        } else {
+          resultsDisplayBox.style.display = "none";
+          errorMessageTab.style.display = "block";
+          document.getElementById('searchButton').style.display = 'block'; 
+          document.getElementById('backButton').style.display = 'block';
+          document.getElementById('newSearchButton').style.display = 'none';
+          document.getElementById('backToListButton').style.display = 'none';
+        }
+      }, 2000);
+    }
+
+    // Hide Empty Field Error Message
+    function hideEmptyFieldError() {
+      const emptyFieldsErrorMessage = document.getElementById('emptyFieldsErrorMessage');
+      const serviceCodeContainer = document.getElementById('serviceCodeContainer');
+      const identityNumberContainer = document.getElementById('identityNumberContainer');
+      if (emptyFieldsErrorMessage.style.display === 'block') {
+          emptyFieldsErrorMessage.style.display = 'none';
+          serviceCodeContainer.style.marginTop = ''; 
+          identityNumberContainer.style.marginTop = ''; 
+      }
+    }
+
+    // Reset Form to Initial State
+    function resetFormToInitialState() {
+      const searchButton = document.getElementById('searchButton');
+      document.getElementById('identityNumber').value = '';
+      document.getElementById('serviceCode').value = '';
+      document.getElementById('errorMessageTab').style.display = 'none';
+      document.getElementById('emptyFieldsErrorMessage').style.display = 'none';
+      document.getElementById('resultsDisplayBox').style.display = 'none';
+      document.getElementById('searchButton').style.display = 'block';
+      document.getElementById('backButton').style.display = 'block';
+      document.getElementById('newSearchButton').style.display = 'none';
+      document.getElementById('backToListButton').style.display = 'none';
+      // Reset button state completely
+      document.getElementById('loadingSpinnerElement').style.display = 'none';
+      searchButton.classList.remove('loading');
+      searchButton.disabled = false;
+      // Reset margins
+      document.getElementById('serviceCodeContainer').style.marginTop = ''; 
+      document.getElementById('identityNumberContainer').style.marginTop = ''; 
+    }
+
+    // Perform New Search Action
+    function performNewSearch() {
+      resetFormToInitialState();
+    }
+
+    // Initialize Application on Page Load
+    window.addEventListener('load', () => {
+      document.getElementById('mainHeader').classList.add('show');
+      initializeApplicationData();
+      resetFormToInitialState();
+    });
+  </script>
+</body>
+</html>
+
